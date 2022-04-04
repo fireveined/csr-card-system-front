@@ -16,6 +16,7 @@ export interface ISale {
     type: string;
     createdAt: string;
     cardId: string;
+    notes: string;
 }
 
 export interface IPerson {

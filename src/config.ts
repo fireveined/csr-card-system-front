@@ -1,1 +1,1 @@
-export const API_URL = process.env.NODE_ENV === "production" ? "http://csr-api.misjapiernik.pl" : "http://localhost:3000";
+export const API_URL = process.env.NODE_ENV === "production" ? "https://csr-api.misjapiernik.pl" : "http://localhost:3000";

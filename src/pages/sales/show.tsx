@@ -19,7 +19,8 @@ export const SaleShow: React.FC<IResourceComponentsProps> = () => {
             <Text>{record?.type}</Text>
             <Title level={5}>Data dodania</Title>
             <Text>{new Date(record?.createdAt || "").toLocaleString()}</Text>
-
+            <Title level={5}>Notes</Title>
+            <Text>{record?.notes}</Text>
         </Show>
     );
 };

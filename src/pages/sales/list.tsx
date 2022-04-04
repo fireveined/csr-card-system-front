@@ -109,6 +109,14 @@ export const SalesList: React.FC<IResourceComponentsProps> = () => {
                     defaultSortOrder={getDefaultSortOrder("createdAt", sorter)}
                     sorter
                 />
+                <Table.Column
+                    dataIndex="notes"
+                    key="notes"
+                    title="Notatki"
+                    render={(value) => <TextField value={value}/>}
+                    defaultSortOrder={getDefaultSortOrder("notes", sorter)}
+                    sorter
+                />
                 <Table.Column<ISale>
                     title="Actions"
                     dataIndex="actions"

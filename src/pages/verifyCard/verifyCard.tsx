@@ -24,6 +24,16 @@ export const CardVerifyPage = () => {
 
     const getClients = async () => {
         const cardId = (document.querySelector("#cardId_field") as HTMLInputElement).value;
+        if (!cardId || cardId.length !== 5) {
+            open({
+                message: "Numer karty powinien mieć 5 znaków, na przykład 00123",
+                description: "Błąd",
+                key: "qr-code" + Date.now(),
+                type: "error"
+            });
+            return;
+        }
+
         try {
             const data = await axios.get(apiUrl + "/persons/verify/" + cardId)
             data.data.forEach((client: any) => client.key = client.id);
@@ -84,7 +94,8 @@ export const CardVerifyPage = () => {
                     <Form.Item
                         label="Numer karty"
                         name="cardId"
-                        rules={[{required: true}]}>
+                        rules={[{required: true}]}
+                        extra={"Numer karty powinien mieć 5 znaków, np 00123"}>
                         <Input ref={cardIdInputRef} id={"cardId_field"}/>
                     </Form.Item>
                     <Form.Item>
@@ -104,7 +115,7 @@ export const CardVerifyPage = () => {
                 {table}
 
                 {QRScannerEnabled === 1 ? <QrReader
-                    constraints={{facingMode: 'user'}}
+                    constraints={{facingMode: 'environment'}}
                     scanDelay={700}
                     onResult={(result: any, error: any) => {
                         if (!!result && result.text && result.text !== checkedCardId) {
@@ -114,7 +125,7 @@ export const CardVerifyPage = () => {
                             setQRScannerEnabled(2);
                         }
 
-                        if (!!error && (error.message || error.name || "").toLowerCase() !== "e") {
+                        if (!!error && (error.message || error.name || "").toLowerCase().length > 4) {
                             console.error(error);
                             open({
                                 message: error.toString(),

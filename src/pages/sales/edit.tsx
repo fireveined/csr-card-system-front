@@ -35,6 +35,14 @@ export const SaleEdit: React.FC<IResourceComponentsProps> = () => {
             rules={[{required: true}]}>
           <Input/>
         </Form.Item>
+
+
+        <Form.Item
+            label="Dodatkowe notatki"
+            name="notes">
+          <Input.TextArea/>
+        </Form.Item>
+
       </Form>
     </Edit>
   );
