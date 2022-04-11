@@ -1,9 +1,11 @@
-import { Button, Card, Form, Input, Table } from "@pankod/refine-antd"
+
+import {Button, Card, Form, Image, Input, Table} from "@pankod/refine-antd"
 import * as React from "react";
-import { useRef, useState } from "react";
-import { useApiUrl, useNavigation, useNotification } from "@pankod/refine-core";
-import { axios } from "../../authProvider";
-import { QrReader } from 'react-qr-reader';
+import {useRef, useState} from "react";
+import {useApiUrl, useNavigation, useNotification} from "@pankod/refine-core";
+import {axios} from "../../authProvider";
+import {QrReader} from 'react-qr-reader';
+import "./styles.css";
 
 
 interface ClientData {
@@ -98,13 +100,16 @@ export const CardVerifyPage = () => {
                         extra={"Numer karty powinien mieć 5 znaków, np 00123"}>
                         <Input ref={cardIdInputRef} id={"cardId_field"}/>
                     </Form.Item>
-                    <Form.Item>
-                        <Button htmlType="submit" type="primary"
-                                onClick={getClients}>
-                            Sprawdź przypisane osoby
-                        </Button>
-                    </Form.Item>
-
+                    <div className="form-row">
+                        <Form.Item>
+                            <Button htmlType="submit" type="primary"
+                                    onClick={getClients}>
+                                Sprawdź przypisane osoby
+                            </Button>
+                        </Form.Item>
+                        {QRScannerEnabled === 1 &&
+                            <Button className="qr-reader-close-button" onClick={()=> setQRScannerEnabled(0)}>Zamknij skanner</Button>}
+                    </div>
                     {(QRScannerEnabled === 0 && !clients.length) ? <Button type="primary"
                                                                            onClick={() => setQRScannerEnabled(1)}>
                         Włącz skaner QR kodów
@@ -117,6 +122,7 @@ export const CardVerifyPage = () => {
                 {QRScannerEnabled === 1 ? <QrReader
                     constraints={{facingMode: 'environment'}}
                     scanDelay={700}
+                    videoStyle={{height:'80%'}}
                     onResult={(result: any, error: any) => {
                         if (!!result && result.text && result.text !== checkedCardId) {
                             console.log((cardIdInputRef.current as any).input);

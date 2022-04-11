@@ -1,0 +1,31 @@
+
+
+.form-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.qr-reader-close-button {
+    color:white;
+    background-color: red;
+}
+
+@media screen and (max-width: 430px){
+
+    .ant-card-body{
+        padding: 12px;
+    }
+
+    .ant-btn{
+        padding: 4px 10px;
+      font-size: 13px;
+
+    }
+
+}
+@media screen and (max-width: 360px){
+    .form-row{
+        display: block;
+    }
+}
+
