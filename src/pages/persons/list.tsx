@@ -1,4 +1,4 @@
-import { CrudFilters, IResourceComponentsProps } from "@pankod/refine-core";
+import {CrudFilters, IResourceComponentsProps} from "@pankod/refine-core";
 
 import {
     Button,
@@ -19,8 +19,9 @@ import {
     useTable
 } from "@pankod/refine-antd";
 
-import { ICompany, IPerson } from "interfaces";
+import {ICompany, IPerson} from "interfaces";
 import * as React from "react";
+import {useTranslation} from "react-i18next";
 
 
 export interface IPersonFilterOption {
@@ -33,7 +34,9 @@ export interface IPersonFilterOption {
 
 
 export const PersonList: React.FC<IResourceComponentsProps> = () => {
+    const [t] = useTranslation();
     const {tableProps, sorter, searchFormProps} = useTable<IPerson>({
+
         onSearch: (params) => {
             const filters: CrudFilters = [];
             const {documentId, cardId, surname} = params as IPersonFilterOption;
@@ -75,17 +78,17 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
     return (
         <List>
             {/*<Collapse >*/}
-                {/*<Collapse.Panel key={"1"} header={"Filtry"}>*/}
-                    <Card title="Filtry">
-                        <Filter formProps={searchFormProps}/>
-                    </Card>
-                {/*</Collapse.Panel>*/}
+            {/*<Collapse.Panel key={"1"} header={"Filtry"}>*/}
+            <Card title={t('filters')}>
+                <Filter formProps={searchFormProps}/>
+            </Card>
+            {/*</Collapse.Panel>*/}
             {/*</Collapse>*/}
             <Table {...tableProps} rowKey="id">
                 <Table.Column
                     dataIndex="cardId"
                     key="cardId"
-                    title="Karta"
+                    title={t('card')}
                     render={(value) => <TextField value={value}/>}
                     defaultSortOrder={getDefaultSortOrder("cardId", sorter)}
                     sorter
@@ -93,7 +96,7 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
                 <Table.Column
                     dataIndex="name"
                     key="name"
-                    title="Imię"
+                    title={t('name')}
                     render={(value) => <TextField value={value}/>}
                     defaultSortOrder={getDefaultSortOrder("name", sorter)}
                     sorter
@@ -101,7 +104,7 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
                 <Table.Column
                     dataIndex="surname"
                     key="surname"
-                    title="Nazwisko"
+                    title={t('surname')}
                     render={(value) => <TextField value={value}/>}
                     defaultSortOrder={getDefaultSortOrder("surname", sorter)}
                     sorter
@@ -109,7 +112,7 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
                 <Table.Column
                     dataIndex="age"
                     key="age"
-                    title="Wiek"
+                    title={t('age')}
                     render={(value) => <TextField value={value}/>}
                     defaultSortOrder={getDefaultSortOrder("age", sorter)}
                     sorter
@@ -117,7 +120,7 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
                 <Table.Column
                     dataIndex="documentId"
                     key="documentId"
-                    title="Dokument"
+                    title={t('document')}
                     render={(value) => <TextField value={value}/>}
                     defaultSortOrder={getDefaultSortOrder("documentId", sorter)}
                     sorter
@@ -125,13 +128,13 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
                 <Table.Column
                     dataIndex="notes"
                     key="notes"
-                    title="Notatki"
+                    title={t('notes')}
                     render={(value) => <TextField value={value.length > 20 ? value.substr(0, 20) + "..." : value}/>}
                     defaultSortOrder={getDefaultSortOrder("notes", sorter)}
                     sorter
                 />
                 <Table.Column<ICompany>
-                    title="Akcje"
+                    title={t('actions')}
                     dataIndex="actions"
                     render={(_, record) => (
                         <Space>
@@ -148,34 +151,35 @@ export const PersonList: React.FC<IResourceComponentsProps> = () => {
 
 
 const Filter: React.FC<{ formProps: FormProps }> = ({formProps}) => {
+    const [t]= useTranslation();
     // const { selectProps: categorySelectProps } = useSelect<ICategory>({
     //     resource: "categories",
     // });
 
     return (
         <Form layout="vertical" {...formProps}>
-            <Form.Item label="Numer karty" name="cardId">
+            <Form.Item label={t('card-id')} name="cardId">
                 <Input
-                    placeholder="Numer karty"
+                    placeholder={t('card-id')}
                     prefix={<Icons.SearchOutlined/>}
                 />
             </Form.Item>
-            <Form.Item label="Nazwisko" name="surname">
+            <Form.Item label={t('surname')} name="surname">
                 <Input
-                    placeholder="Nazwisko"
+                    placeholder={t('surname')}
                     prefix={<Icons.SearchOutlined/>}
                 />
             </Form.Item>
 
-            <Form.Item label="Numer dokumentu" name="documentId">
+            <Form.Item label={t('document-id')} name="documentId">
                 <Input
-                    placeholder="Numer dokumentu"
+                    placeholder={t('document-id')}
                     prefix={<Icons.SearchOutlined/>}
                 />
             </Form.Item>
             <Form.Item>
                 <Button htmlType="submit" type="primary">
-                    Filtruj
+                    {t('filter')}
                 </Button>
             </Form.Item>
         </Form>

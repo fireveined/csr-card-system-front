@@ -6,6 +6,7 @@ import {useApiUrl, useNavigation, useNotification} from "@pankod/refine-core";
 import {axios} from "../../authProvider";
 import {QrReader} from 'react-qr-reader';
 import "./styles.css";
+import {useTranslation} from "react-i18next";
 
 
 interface ClientData {
@@ -23,13 +24,14 @@ export const CardVerifyPage = () => {
     const {push} = useNavigation();
     const {open} = useNotification();
     const cardIdInputRef = useRef(null);
+    const [t, i18n] = useTranslation();
 
     const getClients = async () => {
         const cardId = (document.querySelector("#cardId_field") as HTMLInputElement).value;
         if (!cardId || cardId.length !== 5) {
             open({
-                message: "Numer karty powinien mieć 5 znaków, na przykład 00123",
-                description: "Błąd",
+                message: t('card-hint'),
+                description: t('error'),
                 key: "qr-code" + Date.now(),
                 type: "error"
             });
@@ -63,29 +65,29 @@ export const CardVerifyPage = () => {
 
 
     const columns = [{
-        title: 'Imię',
+        title: t('name'),
         dataIndex: 'name',
         key: 'name',
     }, {
-        title: 'Wiek',
+        title: t('age'),
         dataIndex: 'age',
         key: 'age',
     }, {
-        title: 'Notatki',
+        title: t('notes'),
         dataIndex: 'notes',
         key: 'notes',
     }];
 
     const table = clients.length
         ? <div><br/><br/>
-            <b> Osoby przypisane do karty numer {checkedCardId}</b>
+            <b> {t('people-on-the-card')}Osoby przypisane do karty numer {checkedCardId}</b>
             <Table columns={columns} dataSource={clients}/>
         </div>
-        : (checkedCardId ? <b> Brak osób przypisanych do karty o numerze {checkedCardId}</b> : "");
+        : (checkedCardId ? <b> {t('lack-of-people-on-the-card')}Brak osób przypisanych do karty o numerze {checkedCardId}</b> : "");
 
 
     const checkGivenHelpsButton = clients.length ?
-        <Button type={"primary"} onClick={redirectToGivenHelpsList}>Pokaż przedmioty wydane na tę kartę</Button> : "";
+        <Button type={"primary"} onClick={redirectToGivenHelpsList}>{t('show-received-items')}Pokaż przedmioty wydane na tę kartę</Button> : "";
 
 
     return (
@@ -94,25 +96,25 @@ export const CardVerifyPage = () => {
 
                 <Form layout="vertical">
                     <Form.Item
-                        label="Numer karty"
+                        label={t('card-id')}
                         name="cardId"
                         rules={[{required: true}]}
-                        extra={"Numer karty powinien mieć 5 znaków, np 00123"}>
+                        extra={t('card-hint')}>
                         <Input ref={cardIdInputRef} id={"cardId_field"}/>
                     </Form.Item>
                     <div className="form-row">
+                        <Button htmlType="submit" type="primary"
+                                onClick={getClients}>
+                            {t('check-people-on-the-card')}
+                        </Button>
                         <Form.Item>
-                            <Button htmlType="submit" type="primary"
-                                    onClick={getClients}>
-                                Sprawdź przypisane osoby
-                            </Button>
                         </Form.Item>
                         {QRScannerEnabled === 1 &&
-                            <Button className="qr-reader-close-button" onClick={()=> setQRScannerEnabled(0)}>Zamknij skanner</Button>}
+                            <Button className="qr-reader-close-button" onClick={()=> setQRScannerEnabled(0)}>{t('close-qr-scanner')}</Button>}
                     </div>
                     {(QRScannerEnabled === 0 && !clients.length) ? <Button type="primary"
                                                                            onClick={() => setQRScannerEnabled(1)}>
-                        Włącz skaner QR kodów
+                        {t('open-qr-scanner')}
                     </Button> : ""}
 
                     {checkGivenHelpsButton}
@@ -135,7 +137,7 @@ export const CardVerifyPage = () => {
                             console.error(error);
                             open({
                                 message: error.toString(),
-                                description: "Nie można uruchomić kamery",
+                                description: t('qr-scanner-opening-error'),
                                 key: "unique-id",
                                 type: "error"
                             });

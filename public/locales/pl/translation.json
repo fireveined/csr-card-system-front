@@ -1,0 +1,31 @@
+{
+  "verify-card": "Weryfikuj kartę",
+  "log-out": "Wyloguj",
+  "people": "Osoby",
+  "search-by-card-id-name-or-surname": "Szukaj po numerze karty, imieniu lub nazwisku",
+  "card-id": "Number karty",
+  "name": "Imie",
+  "surname": "Nazwisko",
+  "document-id": "Numer karty",
+  "age": "Wiek",
+  "phone-number": "Numer telefonu",
+  "notes": "Notatki",
+  "card": "Karta",
+  "document": "Dokument",
+  "actions": "Akcje",
+  "filter": "Filtruj",
+  "added-to-the-system": "Dodano do systemu",
+  "people-on-the-card": "Osoby przypisane do karty numer ",
+  "lack-of-people-on-the-card": "Brak osób przypisanych do karty numer ",
+  "show-received-items": "Pokaż przedmioty otrzymane na daną kartę",
+  "card-hint": "Numer karty powinien zawierać 5 cyfr, np 00123",
+  "check-people-on-the-card": "Sprawdż osób przypisanych do tej karty",
+  "open-qr-scanner": "Otwórz QR skaner",
+  "close-qr-scanner": "Zamknij skanner",
+  "qr-scanner-opening-error": "Nie można uruchomić kamery",
+  "aid-provided": "Udzielona pomóc",
+  "error": "Błąd"
+
+
+
+}
