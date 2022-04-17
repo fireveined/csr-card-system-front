@@ -5,12 +5,12 @@ import { Show, Typography } from "@pankod/refine-antd";
 import { IPerson } from "interfaces";
 import {useTranslation} from "react-i18next";
 
-const {Title, Text, Paragraph} = Typography;
+const {Title, Text} = Typography;
 
 export const PersonShow: React.FC<IResourceComponentsProps> = () => {
     const {queryResult} = useShow<IPerson>();
     const {data, isLoading} = queryResult;
-    const [t, i18n] = useTranslation();
+    const [t] = useTranslation();
     const record = data?.data;
     console.log(record);
 

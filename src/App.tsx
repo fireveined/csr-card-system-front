@@ -16,28 +16,6 @@ import {CardVerifyPage} from "./pages/verifyCard/verifyCard";
 import {useTranslation} from "react-i18next";
 
 function App() {
-//
-// const translations: any = {
-//     "Create Klienci": "Dodaj klienta",
-//     "Kliencis": "Lista klientów",
-//     "Save": "Dodaj",
-//     "Create Udzielona pomoc": "Dodaj udzieloną pomoc",
-//     "Udzielona pomocs": "Lista udzielonej pomocy",
-// }
-//     const i18nProvider = {
-//         translate: (key: string, params: object) => {
-//             if(translations[params.toString()]){
-//                 return translations[params.toString()];
-//             }
-//             if((params.toString()) === "Kliencis"){
-//                 return "Klienci";
-//             }
-//             console.log(key, params);
-//             return params.toString();
-//         },
-//         changeLocale: (lang: string) => Promise.resolve(),
-//         getLocale: () =>  "en",
-//     };
 
     const [t] = useTranslation()
     const dataProvider = nestjsxCrudDataProvider(API_URL, axios);
@@ -53,10 +31,9 @@ function App() {
                 }]
             }}
             notificationProvider={notificationProvider}
-            // i18nProvider={i18nProvider}
             Layout={Layout}
             dataProvider={dataProvider}
-            authProvider={mockedAuthProvider}
+            authProvider={authProvider}
             LoginPage={Login}
             Sider={CustomSider}
             syncWithLocation={true}

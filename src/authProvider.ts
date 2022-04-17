@@ -71,6 +71,7 @@ export const authProvider: AuthProvider = {
         });
     },
 };
+
 export const mockedAuthProvider = {
     login: (params: any) => {
         if (params.username === "admin") {
