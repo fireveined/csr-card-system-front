@@ -1,0 +1,31 @@
+{
+  "verify-card": "Verify Card",
+  "log-out": "Log Out",
+  "people": "People",
+  "search-by-card-id-name-or-surname": "Search by card id, name or surname",
+  "card-id": "Card number",
+  "name": "Name",
+  "surname": "Surname",
+  "document-id": "Document number",
+  "age": "Age",
+  "phone-number": "Phone number",
+  "notes": "Notes",
+  "card": "Card",
+  "document": "Document",
+  "actions": "Actions",
+  "filter": "Filter",
+  "added-to-the-system": "Added to the system",
+  "people-on-the-card": "People assigned to card number ",
+  "lack-of-people-on-the-card": "The are no people assigned to card number ",
+  "show-received-items": "Show goods that were received with this card",
+  "card-hint": "Card number consists of 5 digits, for example 00123",
+  "check-people-on-the-card": "Check people assigned to this card",
+  "open-qr-scanner": "Open QR scanner",
+  "close-qr-scanner": "Close QR scanner",
+  "qr-scanner-opening-error": "Camera can't be accessed",
+  "aid-provided": "Aid provided",
+  "error": "Error"
+
+
+
+}

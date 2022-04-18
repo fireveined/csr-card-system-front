@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useLogout, useNavigation, useTitle } from "@pankod/refine-core";
-import { AntdLayout, Grid, Icons, Menu, useMenu } from "@pankod/refine-antd";
-import { antLayoutSider, antLayoutSiderMobile } from "./styles";
+import React, {useState} from "react";
+import {useLogout, useNavigation, useTitle} from "@pankod/refine-core";
+import {AntdLayout, Grid, Icons, Menu, useMenu} from "@pankod/refine-antd";
+import {antLayoutSider, antLayoutSiderMobile, SiderLanguageButton} from "./styles";
+import {useTranslation} from "react-i18next";
 
 export const CustomSider: React.FC = () => {
     const [collapsed, setCollapsed] = useState<boolean>(false);
-
+    const [t, i18n] = useTranslation()
     const Title = useTitle();
     const {mutate: logout} = useLogout();
     const {menuItems, selectedKey} = useMenu();
@@ -14,6 +15,10 @@ export const CustomSider: React.FC = () => {
     console.log(selectedKey)
     const isMobile = !breakpoint.lg;
     console.log(menuItems);
+
+    function changeLanguage(language: string) {
+        i18n.changeLanguage(language)
+    }
 
     return (
         <AntdLayout.Sider
@@ -57,7 +62,7 @@ export const CustomSider: React.FC = () => {
                                     alignItems: "center"
                                 }}
                             >
-                                {label}
+                                {t(`${label}`)}
                                 {!collapsed && isSelected && <Icons.RightOutlined/>}
                             </div>
                         </Menu.Item>
@@ -73,19 +78,27 @@ export const CustomSider: React.FC = () => {
                         justifyContent: "space-between",
                         alignItems: "center"
                     }}>
-                        <span>Weryfikuj kartę</span>
+                        <span>{t('verify-card')}</span>
                         {!collapsed && selectedKey === "/verify-card" && <Icons.RightOutlined/>}
                     </div>
                 </Menu.Item>
-
-
+                <Menu.Item>
+                <div style={{
+                    display: "flex",
+                    alignItems: "center"
+                }}>
+                    <button style={SiderLanguageButton} onClick={() => changeLanguage('en')}>EN</button>
+                    <button style={SiderLanguageButton} onClick={() => changeLanguage('pl')}>PL</button>
+                    <button style={SiderLanguageButton} onClick={() => changeLanguage('ua')}>UA</button>
+                </div>
+                </Menu.Item>
                 <Menu.Item key={"#"}>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center"
                     }}>
-                        <span onClick={() => logout()}>Wyloguj</span>
+                        <span onClick={() => logout()}>{t('log-out')}</span>
                     </div>
                 </Menu.Item>
             </Menu>

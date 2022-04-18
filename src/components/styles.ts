@@ -8,3 +8,12 @@ export const antLayoutSiderMobile: CSSProperties = {
     height: "100vh",
     zIndex: 999,
 };
+export const SiderLanguageButton = {
+    background: "none",
+    color: "inherit",
+    border: "none",
+    font: "inherit",
+    cursor: "pointer",
+    outline: "inherit",
+
+}

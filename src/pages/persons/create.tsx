@@ -5,57 +5,59 @@ import { Create, Form, Input, Typography, useForm, InputNumber  } from "@pankod/
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 import { IPerson } from "interfaces";
+import {useTranslation} from "react-i18next";
 
 export const PersonCreate: React.FC<IResourceComponentsProps> = () => {
     const {Title} = Typography;
     const {formProps, saveButtonProps} = useForm<IPerson>();
+    const [t] = useTranslation();
 
     return (
         <Create saveButtonProps={saveButtonProps}>
             <Form {...formProps} layout="vertical">
 
                 <Form.Item
-                    label="Numer karty"
+                    label={t('card-id')}
                     name="cardId"
                     rules={[{required: true}]}>
                     <Input/>
                 </Form.Item>
 
                 <Form.Item
-                    label="Imię"
+                    label={t('name')}
                     name="name"
                     rules={[{required: true}]}>
                     <Input/>
                 </Form.Item>
 
                 <Form.Item
-                    label="Nazwisko"
+                    label={t('surname')}
                     name="surname">
                     <Input/>
                 </Form.Item>
 
                 <Form.Item
-                    label="Numer dokumentu"
+                    label={t('document-id')}
                     name="documentId">
                     <Input/>
                 </Form.Item>
 
                 /* TODO: number validation*/
                 <Form.Item
-                    label="Wiek"
+                    label={t('age')}
                     name="age">
                     <InputNumber/>
                 </Form.Item>
 
 
                 <Form.Item
-                    label="Numer telefonu"
+                    label={t('phone-number')}
                     name="phone">
                     <Input/>
                 </Form.Item>
 
                 <Form.Item
-                    label="Dodatkowe notatki"
+                    label={t('notes')}
                     name="notes">
                     <Input.TextArea/>
                 </Form.Item>

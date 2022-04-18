@@ -4,6 +4,7 @@ import { AntdLayout, AutoComplete, Icons, Input, Typography, } from "@pankod/ref
 import routerProvider from "@pankod/refine-react-router";
 import debounce from "lodash/debounce";
 import { IPerson } from "../interfaces";
+import {useTranslation} from "react-i18next";
 
 const {Link} = routerProvider;
 const {Text} = Typography;
@@ -42,6 +43,7 @@ export const Header: React.FC = () => {
     const [value, setValue] = useState<string>("");
     const [options, setOptions] = useState<IOptions[]>([]);
     const {push} = useNavigation();
+    const [t] = useTranslation();
 
     const {refetch: refetchPersons} = useList<IPerson>({
         resource: "persons",
@@ -65,7 +67,7 @@ export const Header: React.FC = () => {
                     setOptions((prevOptions) => [
                         ...prevOptions,
                         {
-                            label: renderTitle("Ludzie"),
+                            label: renderTitle(t('people')),
                             options: postOptionGroup,
                         },
                     ]);
@@ -96,7 +98,7 @@ export const Header: React.FC = () => {
             >
                 <Input
                     size="large"
-                    placeholder="Szukaj po numerze karty, imieniu lub nazwisku"
+                    placeholder={t('search-by-card-id-name-or-surname')}
                     suffix={<SearchOutlined/>}
                 />
             </AutoComplete>
